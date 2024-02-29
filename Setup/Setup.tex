@@ -1,0 +1,278 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Setup Packages:
+
+%% Multicolumns:
+\usepackage{multicol}
+
+%% Changepage:
+\usepackage{changepage}
+
+%% eToolBox
+\usepackage{etoolbox}
+
+%% Translator:
+\usepackage[ngerman]{babel}
+
+%% Coloring the Headerbox
+\usepackage{tcolorbox}
+
+%% Umlaute:
+\usepackage[utf8]{inputenc}
+
+%% Import:
+\usepackage{import}
+
+%% Textediting:
+\usepackage{soul}
+
+%% Background Pictures:
+\usepackage{wallpaper}
+
+%% Editing Titles:
+\usepackage{titlesec}
+
+%% Fixed Tabel Size:
+\usepackage{tabularx}
+
+\usepackage{lmodern}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Colours:
+
+%% Coolgray: ligthgray
+\definecolor{coolgray}{HTML}{69747C}
+
+%% Violetbrown: dark violet
+\definecolor{violetbrown}{HTML}{684756}
+
+%% Saddlebrown: orange brown
+\definecolor{saddlebrown}{HTML}{874000}
+
+%% Huntergreen: dark green
+\definecolor{huntergreen}{HTML}{28502E}
+
+%% Crayola: dark blue
+\definecolor{crayola}{HTML}{1B2F33} 
+
+%% Frenchbistre: light brown
+\definecolor{frenchbistre}{HTML}{8C7051} 
+
+%% Darkliver: gray
+\definecolor{darkliver}{HTML}{5A5A66}
+
+%% Burnt Sienna: Orange (IML)
+\definecolor{burnt_sienna}{HTML}{DE7C5A}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Selected Colour:
+\newcommand{\ColourOne}{burnt_sienna}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Building the Document:
+
+%% Spacing between Sectionboxes
+\newcommand{\SpacingBoxOne}{-9pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Header:
+
+\long\def\title#1{\def\title{#1}}
+\def\author{}
+\long\def\author#1{\def\author{#1}}
+
+\newcommand{\Header}[3][]{%
+    \begin{adjustwidth}{-1mm}{-1mm} %% Increasing Box width
+        \begin{tcolorbox}[%
+            arc=0mm, %% Rounding of the Headerbox
+            colframe=\ColourOne, %% Colour of the Headerbox
+            colback=\ColourOne, %% Colour of the Headerbox
+            boxrule=0pt, % Border Box
+            toptitle=0mm, %
+            bottomtitle=1mm, %
+            right=0mm, %
+            left=0mm, %
+            fontupper=\color{white}, % Colour of the Text
+            after skip = 0.1mm,%
+            top= -2mm, %
+            bottom=0mm, %
+            title= \huge \center \textbf{#2} \par% %% Title
+            \large \author{} %% Author
+            \center \small Version: \today %% Version
+        ]%
+        \end{tcolorbox}%
+    \end{adjustwidth}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section:
+
+\renewcommand{\section}[1]{
+\begin{adjustwidth}{-1mm}{-1mm} %% Increasing Box width
+    \begin{tcolorbox}[%
+                        arc=0mm, %% Rounding of the Sectionbox
+                        colback=\ColourOne, %% Colour of the Sectionbox
+                        boxrule=0pt, %% Border Box
+                        valign=center, %% Vertically Center Title
+                        height from=0mm to 8cm, %% Min and Max Height
+                        top=-4pt, %% Padding Top
+                        bottom=-4pt, %% Padding Bottom
+                        left=0mm,  %% Padding Left
+                        right=0mm, %% Padding Right
+                        after skip = 0.01mm, %% Skip After
+                        before skip = 0.01mm, %% Skip Before
+                        fontupper=\color{white} %% Colour of the Text
+                        ]%
+                        \addtocounter{section}{1} %% Increasing the Section Count
+                        \setcounter{subsection}{0}  %% Reset Subsection Counter
+                        \setcounter{subsubsection}{0}  %% Reset Subsubsection Counter
+                        \renewcommand{\tabcolsep}{6pt} %% Reset Columnseperation
+                        \vskip-2pt
+                        {{\textbf{
+                        \hskip-8pt
+                        \begin{tabularx}{\textwidth}{lX}
+                            \thesection & #1
+                        \end{tabularx}}}}% %% Section Title
+    \end{tcolorbox}%
+\end{adjustwidth}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsection:
+
+
+\renewcommand{\subsection}[1]{
+\begin{adjustwidth}{-1mm}{-1mm} %% Increasing Box width
+    \begin{tcolorbox}[%
+                        arc=0mm, %% Rounding of the Subsectionbox
+                        colback=\ColourOne !55, %% Colour of the Subsectionbox
+                        boxrule=0pt, %% Border Box
+                        valign=center, %% Vertically Center Title
+                        height from=0mm to 8cm, %% Min and Max Height
+                        top=-4pt, %% Padding Top
+                        bottom=-4pt, %% Padding Bottom
+                        left=0mm,  %% Padding Left
+                        right=0mm, %% Padding Right
+                        after skip = 0.01mm, %% Skip After
+                        before skip = 0.01mm, %% Skip Before
+                        fontupper=\color{black} %% Colour of the Text
+                        ]%
+                        \addtocounter{subsection}{1} %% Increasing the Subsection Count
+                        \setcounter{subsubsection}{0}  %% Reset Subsubsection Counter
+                        \renewcommand{\tabcolsep}{6pt} %% Reset Columnseperation
+                        \vskip-2pt
+                        {{\textbf{
+                        \hskip-8pt
+                        \begin{tabularx}{\textwidth}{lX}
+                            \thesubsection & #1
+                        \end{tabularx}}}}% %% Subsection Title
+    \end{tcolorbox}%
+\end{adjustwidth}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Subsubsection:
+
+\renewcommand{\subsubsection}[1]{
+\begin{adjustwidth}{-1mm}{-1mm} %% Increasing Box width
+    \begin{tcolorbox}[%
+                        arc=0mm, %% Rounding of the Subsubsectionbox
+                        colback=\ColourOne !30, %% Colour of the Subsubsectionbox
+                        boxrule=0pt, %% Border Box
+                        valign=center, %% Vertically Center Title
+                        height from=0mm to 8cm, %% Min and Max Height
+                        top=-4pt, %% Padding Top
+                        bottom=-4pt, %% Padding Bottom
+                        left=0mm,  %% Padding Left
+                        right=0mm, %% Padding Right
+                        after skip = 0.05mm, %% Skip After
+                        before skip = 0.05mm, %% Skip Before
+                        fontupper=\color{black} %% Colour of the Text
+                        ]%
+                        \addtocounter{subsubsection}{1} %% Increasing the Subsubsection Count
+                        \renewcommand{\tabcolsep}{6pt} %% Reset Columnseperation
+                        \vskip-2pt
+                        {{\textbf{
+                        \hskip-8pt
+                        \begin{tabularx}{\textwidth}{l X}
+                            \thesubsubsection & #1
+                        \end{tabularx}}}}% %% Subsubsection Title
+    \end{tcolorbox}%
+\end{adjustwidth}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Smallsectionbox:
+\newcommand*{\smallsectionbox}[1]{%
+    \begin{adjustwidth}{-1mm}{-1mm}
+        \begin{tcolorbox}[%
+                        arc=0mm,% corner radius of the subsubsection box
+                        colback=\ColourOne!30,%
+                        boxrule=0pt,% border box
+                        valign=center,% vertically center title
+                        height=8pt,
+                        top=0mm,
+                        bottom=0mm,
+                        left=0.2mm,%
+                        right=0.2mm,%
+                        after skip = 0.01mm,%
+                        before skip = 0mm,%
+                        fontupper=\color{black}% color of the subsubsection box
+                        ]%
+                        \textbf{#1}%
+        \end{tcolorbox}%
+    \end{adjustwidth}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Text Colour:
+\color{black}
+
+
+%% Text Size:
+%\renewcommand{\normalsize}{\fontsize{9pt}{0pt}\selectfont} 
+\renewcommand{\familydefault}{\sfdefault}
+
+% declare `cmex` to be arbitrary scalable
+\DeclareFontShape{OMX}{cmex}{m}{n}{
+  <-7.5> cmex7
+  <7.5-8.5> cmex8
+  <8.5-9.5> cmex9
+  <9.5-> cmex10
+}{}
+\SetSymbolFont{largesymbols}{normal}{OMX}{cmex}{m}{n}
+\SetSymbolFont{largesymbols}{bold}  {OMX}{cmex}{m}{n}
+
+
+\DeclareMathSizes{5}{4}{3}{3}
+
+
+%% Column Creating
+\setlength{\parindent}{0cm}
+\setlength\columnsep{0.5mm}
+\setlength{\columnseprule}{0pt}
+\setlength{\textwidth}{597pt} %% max 597pt
+\setlength{\textheight}{845pt} %% max 845pt
+
+
+%% Geometry of the Columns
+\usepackage[top= 0.1cm, bottom=0.1cm, left=0.1cm, right=0.1cm, headheight=0pt,headsep=0pt]{geometry}
+
+%% Setting the gap between equations
+\setlength{\belowdisplayskip}{2pt} \setlength{\belowdisplayshortskip}{2pt}
+\setlength{\abovedisplayskip}{2pt} \setlength{\abovedisplayshortskip}{2pt}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+
+\setlength\extrarowheight{4pt}

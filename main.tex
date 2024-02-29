@@ -1,0 +1,28 @@
+%% Setup Document: 
+%% \documentclass[fontsize, papertype, orientation]{extarticle}
+%% fontsize: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+%% papertype: a3, a4, a5
+%% orientation: landscape
+\documentclass[8pt, a4paper, landscape]{extarticle}
+
+%% setup:
+\input{Setup/Packages}
+\input{Setup/Setup}
+
+%% Autor:
+\author{Fabio Bühler, fabuehle@ethz.ch}
+
+
+\begin{document}
+    \setlength{\columnseprule}{0.5pt} %% Line between the columns
+    \begin{multicols*}{4} %% Number of Columns
+    \begin{adjustwidth}{1mm}{1mm} %% Increasing Margin
+
+        \Header{[SUBJECT]}
+
+        \section{Example Section}
+            \input{Example_Section/Example_Subsection.tex}
+
+    \end{adjustwidth}%
+    \end{multicols*}
+\end{document}
