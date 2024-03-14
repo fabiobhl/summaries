@@ -1,0 +1,15 @@
+\subsection{Matrix Calculus (Numerator Layout)}
+    \setlength\tabcolsep{2.5pt}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        & \multicolumn{2}{c|}{Scalar $y$} & \multicolumn{2}{c|}{\shortstack{ColVec $\mathbf{y}$ \\ (size mx1)}} & \multicolumn{2}{c|}{\shortstack{Matr $\mathbf{Y}$ \\ (size mxn)}}\\
+        \cline{2-7}
+        & Not. & Size & Not. & Size & Not. & Size \\
+        \hline
+        Scalar $x$ & $\frac{\partial y}{\partial x}$ & (1) & $\frac{\partial \mathbf{y}}{\partial x}$ & (mx1) & $\frac{\partial \mathbf{Y}}{\partial x}$ & (mxn)\\
+        \hline
+        \shortstack{ColVec $\mathbf{x}$ \\ (nx1)} & $\frac{\partial y}{\partial \mathbf{x}}$ & (1xn) & $\frac{\partial \mathbf{y}}{\partial \mathbf{x}}$ & (mxn) & \multicolumn{2}{c|}{} \\
+        \hline
+        \shortstack{Matr. $\mathbf{X}$ \\ (pxq)} & $\frac{\partial y}{\partial \mathbf{X}}$ & (qxp) & \multicolumn{2}{c|}{}  & \multicolumn{2}{c|}{} \\
+        \hline
+    \end{tabular}
