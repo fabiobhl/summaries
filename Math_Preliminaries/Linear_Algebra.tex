@@ -1,0 +1,55 @@
+\subsection{Linear Algebra}
+
+    \smallsectionbox{Cauchy-Schwarz Inequality}
+        \begin{equation*}
+            |\mathbf{u}^\top \mathbf{v}| \leq \norm*{\mathbf{u}} \norm*{\mathbf{v}} \Leftrightarrow -1 \leq \underbrace{\frac{\mathbf{u}^\top \mathbf{v}}{\norm*{\mathbf{u}} \norm*{\mathbf{v}}}}_{\cos(\alpha)} \leq 1
+        \end{equation*}
+        Equality is obtained if $\alpha = 0$ or $\alpha = \pi$.\\
+        Also holds for other norms.
+
+    \smallsectionbox{Spectral Norm}
+        Let $\mathbf{A}$ be a $(m \times d)$-matrix. Then the spectral norm of $\mathbf{A}$ is defined as:
+        \begin{equation*}
+            \norm*{\mathbf{A}} := \max_{\mathbf{v} \in \mathbb{R}^d, \mathbf{v} \neq 0} \frac{\norm*{A \mathbf{v}}}{\norm*{\mathbf{v}}} = \max_{\norm*{\mathbf{v}} = 1} \norm*{\mathbf{A} \mathbf{v}} = \sqrt{\lambda_{\text{max}}(\mathbf{A}^\top \mathbf{A})}
+        \end{equation*}
+        From this it follows: $\norm*{A \mathbf{v}} \leq \norm*{A} \norm*{\mathbf{v}}$
+    
+    \smallsectionbox{Mean Value Theorem}
+        If $f: [a, b] \rightarrow \mathbb{R}$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists a point $c \in (a, b)$ such that
+        \begin{equation*}
+            f'(c) = \frac{f(b) - f(a)}{b - a}
+        \end{equation*}
+
+    \smallsectionbox{Fundemental Theorem of Calculus}
+        Let $f: \mathbf{dom} (f) \rightarrow \mathbb{R}$ be a differentiable function on an open domain $\mathbf{dom}(f) \supset [a,b]$ and let $f'$ be continuous on $[a,b]$. Then
+        \begin{equation*}
+            f(b) - f(a) = \int_{a}^{b} f'(x) \, dx
+        \end{equation*}
+
+    \smallsectionbox{Differentiability}
+        Let $f: \mathbf{dom} (f) \rightarrow \mathbb{R}^m$ where $\mathbf{dom}(f) \subseteq \mathbb{R}^d$.
+        The function $f$ is differentiable at $\mathbf{x} \in \mathbf{dom}(f)$ if there exists a matrix $\mathbf{A} \in \mathbb{R}^{m \times d}$
+        and an error function $r: \mathbb{R}^d \to \mathbb{R}^m$ defined in some neighborhood of $\mathbf{0} \in \mathbb{R}^d$ such that for all $\mathbf{y}$ in some neighborhood of $\mathbf{x}$:
+        \begin{equation*}
+            f(\mathbf{y}) = f(\mathbf{x}) + \mathbf{A}(\mathbf{y} - \mathbf{x}) + r(\mathbf{y} - \mathbf{x})
+        \end{equation*}
+        where
+        \begin{equation*}
+            \lim_{\mathbf{v} \to \mathbf{0}} \frac{r(\mathbf{v})}{\norm*{\mathbf{v}}} = \mathbf{0}
+        \end{equation*}
+
+        From this it follows that the matrix $\mathbf{A}$ is unique and is called the differential or Jacobian of $f$ at $\mathbf{x}$ and is denoted by $D f(\mathbf{x})$.\\
+        $D f(\mathbf{x})$ is the matrix of partial derivatives at the point $\mathbf{x}$:
+        \begin{equation*}
+            D f(\mathbf{x})_{ij} = \frac{\partial f_i}{\partial x_j} (\mathbf{x})
+        \end{equation*}
+        $f$ is called differentiable if $f$ is differentiable at every point in $\mathbf{dom}(f)$ (implies that $\mathbf{dom}(f)$ is open).
+
+    \smallsectionbox{Chain Rule}
+        Let $f: \mathbf{dom}(f) \rightarrow \mathbb{R}^m$, $\mathbf{dom}(f) \subseteq \mathbb{R}^d$\\
+        and $g: \mathbf{dom}(g) \rightarrow \mathbb{R}^d$.\\
+        Suppose that $g$ is differentiable at $\mathbf{x} \in \mathbf{dom}(g)$ and $f$ is differentiable at $g(\mathbf{x}) \in \mathbf{dom}(f)$.\\ 
+        Then the composition $f \circ g$ is differentiable at $\mathbf{x}$ with differential:
+        \begin{equation*}
+            D(f \circ g)(\mathbf{x}) = D f(g(\mathbf{x})) D g(\mathbf{x})
+        \end{equation*}

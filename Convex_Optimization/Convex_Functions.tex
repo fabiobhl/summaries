@@ -1,0 +1,31 @@
+\subsection{Convex Functions}
+    We are considering real valued functions $f: \mathbf{dom}(f) \rightarrow \mathbb{R}, \mathbf{dom}(f) \subseteq \mathbb{R}^d$.
+
+    \smallsectionbox{Convexity Definition}
+        A function $f: \mathbf{dom}(f) \rightarrow \mathbb{R}$ is convex if
+        \begin{enumerate}
+            \item[(i)] $\mathbf{dom}(f)$ is convex, and
+            \item[(ii)] for all $\mathbf{x}, \mathbf{y} \in \mathbf{dom}(f)$ and all $\lambda \in [0, 1]$, we have
+            $$f(\lambda \mathbf{x} + (1 - \lambda)\mathbf{y}) \leq \lambda f(\mathbf{x}) + (1 - \lambda) f(\mathbf{y})$$
+        \end{enumerate}
+        
+
+    \smallsectionbox{Epigraph}
+        The epigraph of a function $f: \mathbf{dom}(f) \rightarrow \mathbb{R}$ is defined as
+        \begin{equation*}
+            \text{epi}(f) = \{(\mathbf{x}, \alpha) \in \mathbf{R}^{d+1} : \mathbf{x} \in \mathbf{dom}(f), \alpha \geq f(\mathbf{x}) \}
+        \end{equation*}
+        The function $f$ is convex if and only if $\text{epi}(f)$ is a convex set.
+
+    
+    \smallsectionbox{Jensens Inequality}
+        Let $f: \mathbb{R}^d \rightarrow \mathbb{R}$ be a convex function, $\mathbf{x}_1,\dots,\mathbf{x}_m \in \mathbf{dom}(f)$,
+        and $\lambda_1, \dots, \lambda_m \in \mathbb{R}_+$ sucht that $\sum_{i=1}^{m}\lambda_i = 1$.
+        Then
+        $$f\left(\sum_{i=1}^m \lambda_i \mathbf{x}_i\right) \leq \sum_{i=1}^m \lambda_i f(\mathbf{x}_i)$$
+        If $f$ is concave, the inequality is reversed.
+    
+    
+    
+
+    

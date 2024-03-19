@@ -1,0 +1,20 @@
+\subsection{Convex Sets}
+    \smallsectionbox{Convex Set}
+        A set $C \subseteq \mathbb{R}^d$ is called \textit{convex} if for any two points $\mathbf{x}, \mathbf{y} \in C$, the connecting line segment is contained in $C$.
+        \begin{equation*}
+            \lambda \mathbf{x} + (1 - \lambda) \mathbf{y} \in C, \quad \forall \mathbf{x}, \mathbf{y} \in C, \lambda \in [0, 1]
+        \end{equation*}
+        $C = \cap_{i\in I} C_i$ is convex if all $C_i$ are convex.
+    
+    \smallsectionbox{Mean Value Inequality}
+        Let $f: \mathbf{dom}(f) \rightarrow \mathbb{R}^m$ be differentiable, $X \subseteq \mathbf{dom}(f)$ a convex set, $B\in \mathbb{R}^+$.
+        If $X \subseteq \mathbf{dom}(f)$ is nonempty and open, the following two statements are equivalent.
+
+        \begin{itemize}
+            \item[(i)] $f$ is $B$-Lipschitz, meaning that
+            $$||f(\mathbf{x})-f(\mathbf{y})|| \leq B ||\mathbf{x}-\mathbf{y}||, \quad \mathbf{x}, \mathbf{y} \in X$$
+            \item[(ii)] $f$ has differentials bounded by $B$ (in spectral norm)
+            $$||Df(\mathbf{x})|| \leq B, \quad \forall \mathbf{x} \in X.$$
+        \end{itemize}
+        
+        Moreover, for every (not necessarily open) convex $X \subseteq \mathbf{dom}(f)$, (ii) implies (i), and this is the mean value inequality.
