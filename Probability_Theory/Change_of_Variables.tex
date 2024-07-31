@@ -1,0 +1,40 @@
+\subsection{Change of Variables}
+    \smallsectionbox{DRV: $x = g(y)$}
+    \begin{equation*}
+        \textstyle p_x(\bar{x}) = \sum_{\bar{y}\in\mathcal{Y}:g(\bar{y})=\bar{x}} p_y(\bar{y})
+    \end{equation*}
+    \smallsectionbox{CRV general case $y = g(x), \to x = g^{-1}(y)$:} 
+    \begin{equation*}
+        p_y(\bar{y}) = \frac{p_x(\bar{x})}{\left\lvert \frac{dg}{dx}(\bar{x}) \right\rvert}, \quad \bar{x} = g^{-1}(y)
+    \end{equation*}
+    \smallsectionbox{CRV -- Multivar. \& Indep. Case: $z=x+y$}
+    \begin{equation*}
+        p_z(\bar{z}) = \sum_{\bar{x}\in\mathcal{X}} p_x(\bar{x}) p_y(\bar{z}-\bar{x})
+    \end{equation*}
+    \smallsectionbox{CRV -- Multivar. \& Cond. Case: $z=g(w,x), w=h(z,x)$}
+    \textit{Assumptions:} 
+    - $g(w,x), p_w$ cont. diff'bar \\
+    - $g(w,x)$ strictly monotonic \\
+    - For scalars $det(x)$ is just $x$
+    \begin{align*}
+        p_{z|x}(\bar{z}|\bar{x}) = 
+        p_w(h(\bar{z},\bar{x})|\bar{x}) \cdot
+        \left\lvert 
+        \det\left( 
+            \textstyle\frac{\partial}{\partial w}g(h(\bar{z},\bar{x}),\bar{x}) 
+        \right) 
+        \right\rvert^{-1}
+    \end{align*}
+
+    \begin{comment}
+    \begin{equation*}
+        \textstyle \text{det} \bigg(\frac{\partial g}{\partial w}(w) \bigg) = \text{det}
+        \begin{pmatrix}
+        \begin{bmatrix}
+            \frac{\partial g_1}{\partial w_1}(w) & \cdots & \frac{\partial g_1}{\partial w_m}(w) \\
+            \vdots & \ddots & \vdots \\
+            \frac{\partial g_m}{\partial w_1}(w) & \cdots & \frac{\partial g_m}{\partial w_m}(w)
+        \end{bmatrix}
+        \end{pmatrix}
+    \end{equation*}
+    \end{comment}

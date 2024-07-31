@@ -1,0 +1,42 @@
+\subsection{Expectation and Variance}
+    \subsubsection{Expectation}
+    \textbf{Definition:} Integral for CRV!
+    \begin{equation*}
+        \textstyle\mathop{\mathbb{E}}_{x}[x] = \textstyle\sum_{\bar{x} \in \mathcal{X}} \bar{x} p_{x}(\bar{x})
+    \end{equation*}
+
+    \begin{tabular}{p{0.26\linewidth} | p{0.62\linewidth}}
+        \toprule
+        \textbf{Linearity} & $\textstyle\mathop{\mathbb{E}}_{xy}[a + bx + cy] = a + b\mathop{\mathbb{E}}_{x}[x] + c\mathop{\mathbb{E}}_{y}[y]$ \\
+        \midrule
+        \textbf{Multi Variable} & $\textstyle\mathop{\mathbb{E}}_{xy}[g(x,y)] = \sum_{\bar{y}} \sum_{\bar{x}} g(\bar{x},\bar{y}) p_{xy}(\bar{x},\bar{y})$ \\
+        \midrule 
+        \textbf{Independence} & $\mathop{\mathbb{E}}_{xy} \left[ xy \right] = \mathop{\mathbb{E}}_{x} \left[ x \right] \mathop{\mathbb{E}}_{y} \left[ y \right]$ \\
+        \bottomrule
+    \end{tabular}
+    % \midrule
+    % \textbf{Law of Tot. Exp.} & $\textstyle\mathop{\mathbb{E}}_{y} \Bigl[\mathop{\mathbb{E}}_{x|y}\left[x\right] \Bigr] = \mathop{\mathbb{E}}_{x}\left[x\right]$ \\
+
+    \smallsectionbox{Law of Unconcious Statistician for $y=g(x)$} 
+    \begin{equation*}
+        \textstyle\mathop{\mathbb{E}}_y \left[ y \right]
+        = \sum_{\bar{y}\in\mathcal{Y}} \bar{y} p_y (\bar{y})
+        = \sum_{\bar{x}\in\mathcal{X}} g(\bar{x})p_x(\bar{x})
+    \end{equation*}
+
+    \subsubsection{Variance (generally a matrix)} 
+    \begin{equation*}
+        \mathop{\mathrm{Var}}_{x}[x] = \mathop{\mathbb{E}}_{x} \left[
+        (x \!-\! \textstyle\mathop{\mathbb{E}}_{x}[x])
+        (x \!-\! \textstyle\mathop{\mathbb{E}}_{x}[x])^\top\right]
+        = \mathop{\mathbb{E}}_{x}\left[ x^2 \right] \!-\! \mathop{\mathbb{E}}_{x}[x]^2
+    \end{equation*}
+
+    \textbf{Linearity}
+    \begin{equation*}
+        \textstyle\mathop{\mathrm{Var}}_{x}[a + bX + cY] = b^2 \mathop{\mathrm{Var}}_{X}[x] + c^2 \mathop{\mathrm{Var}}_{Y}[y] + 2 bc \mathrm{Cov}[X,Y]
+    \end{equation*}
+    \textbf{Covariance:} if independent $\mathrm{Cov}(X,Y) = 0$
+    \begin{equation*}
+        \mathrm{Cov}[X,Y] = \mathop{\mathbb{E}}[(X-\mathop{\mathbb{E}}[X])(Y-\mathop{\mathbb{E}}[Y])]
+    \end{equation*}

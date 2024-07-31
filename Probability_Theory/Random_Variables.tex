@@ -1,0 +1,52 @@
+\subsection{Random Variables}
+    \subsubsection{Discrete Random Variables}
+        \textbf{DRV -- Discrete Random Variable} defined by $p_x, \mathcal{X}$
+        \begin{itemize}[left=0pt, itemsep=-5pt]
+            \item $\mathcal{X} \subset \mathbb{Z}$ of all possible outcomes \\
+            \item $p_x(\bar{x}) \geq 0$ and $\sum_{\bar{x}\in\mathcal{X}}p_x(\bar{x}) = 1$ or $\sum_{\bar{x}\in\mathcal{X}} p_{x|y}(\bar{x} | \bar{y}) = 1$
+        \end{itemize}
+        \begin{tabular}{p{0.35\linewidth} | p{0.53\linewidth}}
+            \toprule
+            \textbf{Margin. / Sum Rule} & $p(\bar{x}) = \textstyle\sum_{\bar{y}\in\mathcal{Y}}p_{xy}(\bar{x},\bar{y})$ \\
+            \midrule
+            \textbf{Cond. / Product Rule} & $p_{x|y}(\bar{x}|\bar{y}) := \frac{p_{xy}(\bar{x},\bar{y})}{p_{y}(\bar{y})}$ \\
+            \midrule
+            \textbf{Total Prob. Theorem} & $p_{x}(\bar{x}) := \textstyle\sum_{\bar{y}\in\mathcal{Y}} p_{x|y}(\bar{x}|\bar{y})p_y(\bar{y})$ \\
+            \bottomrule
+        \end{tabular}
+
+
+
+    \subsubsection{Continuous Random Variables}
+        \textbf{CRV -- Continuous Random Variable:} \textbf{DRV} $\sum$ $\leadsto$ \textbf{CRV} $\int$
+        \begin{itemize} [itemsep=-3pt]
+            \item \textbf{Set} $\mathcal{X} \subseteq \mathbb{R}$ section of real line \\
+            \item \textbf{PDF} $p_x$ satisfies $p_x(\bar{x}) \geq 0$ and $\int_{\mathcal{X}}p_x(\bar{x}) d \bar{x} = 1$
+        \end{itemize}
+        \textbf{Caution:} $ Pr(x = \bar{x}) = 0, \quad Pr(x \in (a, b)) = \int_a^b p(\bar{x}) d\bar{x} $
+
+        \subsubsection{Conditional PDF}
+        \smallsectionbox{Conditional PDF}
+        \begin{tabular}{p{0.35\linewidth} | p{0.53\linewidth}}
+            \toprule
+            \textbf{Margin. / Sum Rule} & $p(\bar{x}|\bar{z}) = \textstyle\sum_{\bar{y}\in\mathcal{Y}}p_{xy|z}(\bar{x},\bar{y}|\bar{z})$ \\
+            \midrule
+            \textbf{Cond. / Product Rule} & $p_{x|yz}(\bar{x}|\bar{y},\bar{z}) := \frac{p_{xy|z}(\bar{x},\bar{y}|\bar{z})}{p_{y|z}(\bar{y}|\bar{z})}$ \\
+            \bottomrule
+        \end{tabular}
+        \smallsectionbox{Independence}
+        \begin{align*}
+            p(x|y) = p(x) \ \ \ \Leftrightarrow \ 
+            p(y|x) = p(y) \ \ \ \Leftrightarrow \ 
+            p(x,y) = p(x)p(y)
+        \end{align*}
+        $p(x,y,z) = p(x,y|z)p(z)$ $\to$ x,y indp. $p(x,y|z) = p(z|x,y)$
+        \smallsectionbox{Conditional Independence}
+        \vspace{1pt}
+        The knowledge of z makes x and y independent:
+        \begin{equation*}
+            p(x|y,z) = p(x|z) \quad \Leftrightarrow \quad
+            p(x,y|z) = p(x|z)p(y|z)
+        \end{equation*}
+        \textbf{Caution!!!} in general we still have: $p(x,y) \neq p(x) p(y)$\\
+        \textbf{Caution!!!} Independence $\nRightarrow $ Conditional Independence

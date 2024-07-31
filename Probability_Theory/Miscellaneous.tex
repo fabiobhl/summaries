@@ -1,0 +1,77 @@
+\subsection{Miscellaneous}
+    \textbf{Indep. multiplication:} $z = xy \to p(z) = \sum_{Y} p_x(\frac{z}{y})p_y(y)$ \\
+    \smallsectionbox{Uniform Distribution}
+    \begin{align*}
+        p(x) = \begin{cases}
+            \frac{1}{b-a} & a \leq x \leq b \\
+            0 & \mathrm{else}
+        \end{cases}
+        \qquad\left\lvert\qquad
+        \begin{aligned}
+            \mathbb{E}\{x\} &= \textstyle\frac{a+b}{2} \\
+            \mathrm{Var}\{x\} &= \textstyle\frac{(b-a)^2}{12}
+        \end{aligned}
+        \right.
+    \end{align*}
+    \smallsectionbox{Triangular Distribution}
+    \begin{align*}
+        p(x) = \begin{cases}
+            \frac{2(x-a)}{(b-a)(c-a)} & a \leq x \leq c \\
+            \frac{2(b-x)}{(b-a)(b-c)} & c \leq x \leq b \\
+            0 & \mathrm{else}
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+        F(x) = \begin{cases}
+            0 & x < a \\
+            \frac{(x-a)^2}{(b-a)(c-a)} & a \leq x \leq c \\
+            1-\frac{(b-x)^2}{(b-a)(b-c)} & c \leq x \leq b \\
+            1 & x > b
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+            \mathbb{E}\{x\} = \textstyle\frac{a+b+c}{3}, \quad
+            \mathrm{Var}\{x\} = \textstyle\frac{a^2+b^2+c^2-ab-ac-bc}{18}
+    \end{align*}
+
+    \smallsectionbox{Gaussian Distribution}
+    \textbf{PDF} Gaussian distributed vector CRV $y = (y_1, \dots, y_D)$
+    \begin{align*}
+        p(x) = \frac{1}{(2\pi)^{D/2} \det(\Sigma)^{1/2}}\exp\left(-\frac{(x-\mu)^T\Sigma^{-1}(x-\mu)}{2}\right)
+    \end{align*}
+    $\leadsto$ fully characterized by mean $\mu \in \mathbb{R}^D$ and var $\Sigma \in \mathbb{R}^{D\times D}$\\
+    (Scalar: $D = 1, \ \sigma^2 = \det(\Sigma)\to \det(\Sigma)^{1/2} = \sigma$)
+    \begin{align*}
+        p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+        \qquad\left\lvert\qquad
+        \begin{aligned}
+            \mathbb{E}\{x\} &= \mu \\
+            \mathrm{Var}\{x\} &= \sigma^2
+        \end{aligned}
+        \right.
+    \end{align*}
+    \textbf{Sum of two independent Gaussians:}
+    \begin{align*}
+        x_1 \sim \mathcal{N}(\mu_1,\Sigma_1), x_2 \sim \mathcal{N}(\mu_2,\sigma_2) \to z = M_1 x_1+M_2 x_2 \\
+        z \sim \mathcal{N}(M_1\mu_1+M_2\mu_2,M_1\Sigma_1 M_1^T+M_2\Sigma_2 M_2^T)    
+    \end{align*}
+
+    \textbf{Diagonal Variance} with 
+    $\Sigma = \text{diag}(
+        \sigma_1^2, \ldots, \sigma_D^2$), 
+    $\mu = \left[\begin{smallmatrix}
+        \mu_1 \\
+        \mu_D
+    \end{smallmatrix}\right]$ \\
+    $\leadsto \ y_i$ mut.indep. iff $\Sigma$ diag.
+    \begin{equation*}
+        p(y) = \prod_{i=1}^{D} \textstyle\frac{1}{\sqrt{2\pi\sigma_i^2}} 
+        \exp(-\frac{(y_i - \mu_i)^2}{2\sigma_i^2})
+    \end{equation*}
+
+    \textbf{Dependent Gaussians:} 
+    \begin{align*}
+        \Sigma_{x\pm y} = \Sigma_x + \Sigma_y \pm \Sigma_{xy}\pm \Sigma_{xy}^T, \ \mu_{x\pm y} = \mu_x \pm \mu_y
+    \end{align*}
+
+    \vfill\null\columnbreak
