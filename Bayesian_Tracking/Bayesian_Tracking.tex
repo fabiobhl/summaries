@@ -1,0 +1,51 @@
+\subsection{Bayesian Tracking}
+    \smallsectionbox{Model}
+    \textbf{Objective:} Calculate pdf of state $p(x(k)|z(1:k))$
+    \begin{align*}
+        x(k) &= q_{k-1}(x(k-1),v(k-1)) \in \mathcal{X} \\
+        z(k) &= h_k(x(k), w(k))
+    \end{align*}
+
+    \smallsectionbox{Prior Update - State Prediction}
+
+    \begin{align*}
+        p(x(k)|z(1\!:\!k\!-\!1)) \!=\! \!
+        \sum_{x(k\!-\!1)}\!
+        \underbrace{p(x(k)|x(k\!-\!1))}_{\text{process model}}
+        \underbrace{p(x(k\!-\!1)|z(1\!:\!k\!-\!1))}_{\text{previous iteration}}
+    \end{align*}
+
+    \smallsectionbox{Measurement Update}
+    \begin{align*}
+        p(\bar{x}(k)|\bar{z}(1\!:\!k)) = 
+        \frac{
+            \overbrace{p(\bar{z}(k)|\bar{x}(k))}^{\text{measurement model}}
+            \overbrace{p(\bar{x}(k)|\bar{z}(1\!:\!k\!-\!1))}^{\text{prior}}
+        }{
+            \underbrace{\textstyle\sum_{i\in\mathcal{X}} p(\bar{z}(k)|i)
+            p(i|\bar{z}(1\!:\!k\!-\!1))}_{\text{normalization}}
+        }
+    \end{align*}
+    \smallsectionbox{Computer Implementation}
+    \begin{enumerate}[leftmargin=1.5em, noitemsep, topsep=0pt]
+        \item \textbf{Enumerate} state space $\mathcal{X} = \{0,1,\dots,N-1\}$
+        \item \textbf{Posterior} define $\mathbf{a}_{k|k}^i := p_{x(k)|z(1:k)}(i|\bar{z}(1:k))$
+        \item \textbf{Prior} define $\mathbf{a}_{k|k-1}^i := p_{x(k)|z(1:k-1)}(i|\bar{z}(1:k-1))$
+    \end{enumerate}
+    \begin{description}
+        \item[Initialization] $\mathbf{a}_{0|0}^i = p_{x(0)}(i) \quad i=0,\dots,N-1$
+    \end{description}
+    \begin{align*}
+        \begin{drcases}
+            \mathbf{a}_{k|k-1}^i &= 
+            \textstyle\sum_{j=0}^{N-1} p_{x(k)|x(k-1)}(i|j) \mathbf{a}_{k-1|k-1}^j \\
+            \mathbf{a}_{k|k}^i &= 
+            \textstyle\frac{
+                p_{z(k)|x(k)}(\bar{z}(k)|i) \mathbf{a}_{k|k-1}^i
+            }{
+                \sum_{j=0}^{N-1} p_{z(k)|x(k)}(\bar{z}(k)|j)\mathbf{a}_{k|k-1}^j
+            }
+        \end{drcases}
+        \mathrm{Iterate \ k>0}
+    \end{align*}
+

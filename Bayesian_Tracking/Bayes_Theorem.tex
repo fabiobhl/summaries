@@ -1,0 +1,12 @@
+\subsection{Bayes Theorem}
+    \textbf{Definition:} (Applies to discrete and continuous random variables)
+    \begin{equation*}
+        p(x|y) = \frac{p(y|x)p(x)}{p(y)}
+    \end{equation*}
+    $x$=system state, $p(x)$=prior belief of state, $z$=observations related to state
+    $p(z|x)$=observation likelihood, $p(x|z)$=posterior belief of state \\
+    $p(z)$=normalization constant $=\textstyle\sum_x p(z|x)p(x)$ \\
+    \textbf{For multiple observations:}
+    \begin{equation*}
+        \underbrace{p(x|z_1, \ldots, z_N)}_{\text{posterior}} =\frac{\overbrace{p(x)}^{\text{prior}} \overbrace{\prod_i p(z_i|x)}^{\text{observation likelihood}} }{\underbrace{\sum_{x\in\mathcal{X} }p(x) \prod_i p(z_i|x)}_{\text{normalization}}}
+    \end{equation*}
