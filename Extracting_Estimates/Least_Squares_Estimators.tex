@@ -1,0 +1,116 @@
+\subsection{General Measurement}
+\begin{align*}
+    \underbrace{
+    \begin{bmatrix}
+        z_1 \\
+        z_m
+    \end{bmatrix}
+    }_{z \ \in \ \mathbb{R}^m}
+    = 
+    \underbrace{
+        \begin{bmatrix}
+            h_{11} & h_{1n} \\
+            h_{m1} & h_{mn}
+        \end{bmatrix}
+    }_{H \ \in \ \mathbb{R}^{m\times n}}
+    \cdot
+    \underbrace{
+        \begin{bmatrix}
+            x_1 \\
+            x_n
+        \end{bmatrix}
+    }_{x \ \in \ \mathbb{R}^n}
+    +
+    \underbrace{
+        \begin{bmatrix}
+            w_1 \\
+            w_m
+        \end{bmatrix}
+    }_{w \ \in \ \mathbb{R}^m}
+\end{align*}
+$m$ Measurements, $n$ States, $w_i \sim \mathcal{N}(0,R)$ -- Zero-mean additive gaussian, $x,w_i \ \forall i$ assumed mutually independent
+\subsection{Likelihood Estimators}
+\subsubsection{ML-Maximum Likelihood}
+Choose $x$ to make $\bar{z}$ most likely:
+\begin{align*}
+    \begin{drcases}
+        x\in\mathcal{X} & \mathrm{unknown} \\
+        p_x(\bar{x}) & \mathrm{unknown}
+    \end{drcases}
+    \quad
+    \widehat{x}^{ML} := \mathop{\mathrm{argmax}}_{\bar{x}\in\mathcal{X}}
+    \left[ p_{z|x}(\bar{z}|\bar{x}) \right]
+\end{align*}
+$p_{z|x}(\bar{z}|\bar{x})$ is var. --  technically not a PDF
+\subsubsection{MAP-Maximum A Posteriori}
+ML given observation \& prior belief about $x$:
+\begin{align*}
+    \begin{drcases}
+        x\in\mathcal{X} & \mathrm{unknown} \\
+        p_x(\bar{x}) & \textbf{known}
+    \end{drcases}
+    \quad
+    \widehat{x}^{MAP} := \mathop{\mathrm{argmax}}_{\bar{x}\in\mathcal{X}}
+    \left[ p_{z|x}(\bar{z}|\bar{x}) p_x(\bar{x}) \right]
+\end{align*}
+$\hat{x}^{MAP} = \hat{x}^{ML}$ for constant $p_x(\bar{x})$
+\subsection{Least Squares Estimators}
+\subsubsection{Linear Least Squares}
+ML estimate when errors are indep. 0-mean, smae variance, $\mathcal{N}$-distributed:
+\begin{align*}
+    \widehat{x}^{LS} := \mathop{\mathrm{argmin}}_{x}
+    \left[(z-Hx)^\top (z-Hx)\right] = (H^\top H)^{-1} H^\top z
+\end{align*}
+$\hat{x}^{LS} = \hat{x}^{ML}$ for gaussian noise
+
+\vfill \null \columnbreak
+
+\subsubsection{Weighted Least Squares}
+\begin{align*}
+    \widehat{x}^{WLS} 
+    :=& \textstyle\mathop{\mathrm{argmin}}_{x} 
+    \left[ (\bar{z} \!-\! H \widehat{x})^\top 
+    R^{-1} (\bar{z} \!-\! H \widehat{x}) \right] \\
+    =& (H^\top R^{-1} H)^{-1} H^\top R^{-1} \bar{z}
+\end{align*}
+\textbf{Incorporate Prior Knowledge on x:} \\
+$r\sim\mathcal{N}(0,P_x) \Rightarrow x := \widehat{x} + r, \mathbb{E}\{x\} = \widehat{x}_0, \mathrm{Var}\{x\} = P_x$ \\
+\textbf{Introduce Extended System:}
+\begin{align*}
+    \tilde{\bar{z}} = \left[ \begin{smallmatrix}
+        \widehat{x}_0 \\
+        z(1:k)
+    \end{smallmatrix} \right],
+    \tilde{H} = \left[ \begin{smallmatrix}
+        \mathbb{I} \\
+        H(1:k)
+    \end{smallmatrix} \right]
+    \tilde{w} = \left[ \begin{smallmatrix}
+        -r \\
+        w(1:k)
+    \end{smallmatrix} \right],
+    \tilde{R}= \left[ \begin{smallmatrix}
+        P_x & 0 \\
+        0 & R(1:k)
+    \end{smallmatrix} \right]
+\end{align*}
+
+\subsubsection{Recursive Least Squares}
+\textbf{Interpretation} Update $\widehat{x}$ recursively when new $\bar{z}(k)$ arrives\\
+\textbf{Estimation Error:} $e(k) = \left( \mathbb{I} - KH \right) e(k-1) - Kw(k)$\\
+\textbf{Objective} Minimize MSE with $P(k) = \mathrm{Var} \left\{ e(k) \right\}$
+\begin{equation*}
+    J(k):= \mathbb{E}\left\{ e^\top(k)e(k) \right\} 
+    = \mathbb{E}\left\{ \mathrm{trace}(P(k)) \right\}
+\end{equation*}
+\textbf{Algorithm}
+\begin{description}[leftmargin=0pt]
+    \item[Initialization:] $\widehat{x}(0) = \widehat{x}_0, \quad  P(0) = P_x = \mathrm{Var}\{x\}$
+    \item[Recursion:] Observe $\bar{z}(k)$, then update:
+    \begin{align*}
+        K(k) \!&=\! P(k-1)H(k)^\top\left( H(k) P(k-1) H(k)^\top + R(k) \right)^{-1} \\
+        \widehat{x}(k) \!&=\! \widehat{x}(k-1) + K(k)
+        \left( \bar{z}(k) - H(k) \widehat{x}(k-1) \right) \\
+        P(k) \!&=\! \left(\mathbb{I} \!-\! K(k)H(k)\right)\!P(k\!-\!1)\!\left(\mathbb{I} \!-\! K(k)H(k)\right)^\top\!\!\!+\!K(k)R(k)K(k)^\top
+    \end{align*}
+\end{description}

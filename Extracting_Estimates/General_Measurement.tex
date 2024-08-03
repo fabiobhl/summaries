@@ -1,0 +1,31 @@
+\subsection{General Measurement}
+\begin{align*}
+    \underbrace{
+    \begin{bmatrix}
+        z_1 \\
+        z_m
+    \end{bmatrix}
+    }_{z \ \in \ \mathbb{R}^m}
+    = 
+    \underbrace{
+        \begin{bmatrix}
+            h_{11} & h_{1n} \\
+            h_{m1} & h_{mn}
+        \end{bmatrix}
+    }_{H \ \in \ \mathbb{R}^{m\times n}}
+    \cdot
+    \underbrace{
+        \begin{bmatrix}
+            x_1 \\
+            x_n
+        \end{bmatrix}
+    }_{x \ \in \ \mathbb{R}^n}
+    +
+    \underbrace{
+        \begin{bmatrix}
+            w_1 \\
+            w_m
+        \end{bmatrix}
+    }_{w \ \in \ \mathbb{R}^m}
+\end{align*}
+$m$ Measurements, $n$ States, $w_i \sim \mathcal{N}(0,R)$ -- Zero-mean additive gaussian, $x,w_i \ \forall i$ assumed mutually independent
