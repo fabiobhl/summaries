@@ -34,12 +34,11 @@
             \mathrm{Var}\{x\} = \textstyle\frac{a^2+b^2+c^2-ab-ac-bc}{18}
     \end{align*}
 
-    \smallsectionbox{Gaussian Distribution}
-    \textbf{PDF} Gaussian distributed vector CRV $y = (y_1, \dots, y_D)$
+    \smallsectionbox{Gaussian Distribution $\mathbf{x} = (x_1, \dots, x_D) \sim \mathcal{N}(\boldsymbol{\mu}, \mathbf{\Sigma})$}
     \begin{align*}
-        p(x) = \frac{1}{(2\pi)^{D/2} \det(\Sigma)^{1/2}}\exp\left(-\frac{(x-\mu)^T\Sigma^{-1}(x-\mu)}{2}\right)
+        p_{\mathbf{x}}(\mathbf{\bar{x}}) = \frac{1}{(2\pi)^{D/2} \det(\mathbf{\Sigma})^{1/2}}\exp\left(-\frac{(\mathbf{\bar{x}}-\boldsymbol{\mu})^T\mathbf{\Sigma}^{-1}(\mathbf{\bar{x}}-\boldsymbol{\mu})}{2}\right)
     \end{align*}
-    $\leadsto$ fully characterized by mean $\mu \in \mathbb{R}^D$ and var $\Sigma \in \mathbb{R}^{D\times D}$\\
+    $\leadsto$ fully characterized by mean $\boldsymbol{\mu} \in \mathbb{R}^D$ and Variance $\boldsymbol{\Sigma} \in \mathbb{R}^{D\times D}$\\
     (Scalar: $D = 1, \ \sigma^2 = \det(\Sigma)\to \det(\Sigma)^{1/2} = \sigma$)
     \begin{align*}
         p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
@@ -50,28 +49,21 @@
         \end{aligned}
         \right.
     \end{align*}
-    \textbf{Sum of two independent Gaussians:}
+    \textbf{Affine transformation of Gaussian: $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Sigma})$}
     \begin{align*}
-        x_1 \sim \mathcal{N}(\mu_1,\Sigma_1), x_2 \sim \mathcal{N}(\mu_2,\sigma_2) \to z = M_1 x_1+M_2 x_2 \\
-        z \sim \mathcal{N}(M_1\mu_1+M_2\mu_2,M_1\Sigma_1 M_1^T+M_2\Sigma_2 M_2^T)    
+        \boldsymbol{y} = M \boldsymbol{x} + \boldsymbol{b} \quad \to \quad \boldsymbol{y} \sim \mathcal{N}(M \boldsymbol{\mu} + \boldsymbol{b}, M \boldsymbol{\Sigma} M^T)
     \end{align*}
-
-    \textbf{Diagonal Variance} with 
-    $\Sigma = \text{diag}(
-        \sigma_1^2, \ldots, \sigma_D^2$), 
-    $\mu = \left[\begin{smallmatrix}
-        \mu_1 \\
-        \mu_D
-    \end{smallmatrix}\right]$ \\
-    $\leadsto \ y_i$ mut.indep. iff $\Sigma$ diag.
+    \textbf{Linear combination of jointly GRV: $\boldsymbol{x}, \boldsymbol{y}$}
+    \begin{align*}
+        &\boldsymbol{z} = M_x \boldsymbol{x} + M_y \boldsymbol{y} \quad \Rightarrow \quad \boldsymbol{z} \sim \mathcal{N}(\boldsymbol{\mu}_z, \boldsymbol{\Sigma}_z)\\
+        &\boldsymbol{\mu}_z = M_x \boldsymbol{\mu}_x + M_y \boldsymbol{\mu}_y \\
+        &\boldsymbol{\Sigma}_z = M_x \boldsymbol{\Sigma}_x M_x^T + M_x \textcolor{red}{\boldsymbol{\Sigma}_{xy}} M_y + M_y \textcolor{red}{\boldsymbol{\Sigma}_{xy}^T} M_x + M_y \boldsymbol{\Sigma}_y M_y^T
+    \end{align*}
+    (\textcolor{red}{Red symbols are zero} if $\boldsymbol{x}, \boldsymbol{y}$ are independent)\\
+    \textbf{Diagonal Variance} $\leadsto \ y_i$ mut.indep. iff $\Sigma$ diagonal
     \begin{equation*}
         p(y) = \prod_{i=1}^{D} \textstyle\frac{1}{\sqrt{2\pi\sigma_i^2}} 
         \exp(-\frac{(y_i - \mu_i)^2}{2\sigma_i^2})
     \end{equation*}
-
-    \textbf{Dependent Gaussians:} 
-    \begin{align*}
-        \Sigma_{x\pm y} = \Sigma_x + \Sigma_y \pm \Sigma_{xy}\pm \Sigma_{xy}^T, \ \mu_{x\pm y} = \mu_x \pm \mu_y
-    \end{align*}
 
     \vfill\null\columnbreak
