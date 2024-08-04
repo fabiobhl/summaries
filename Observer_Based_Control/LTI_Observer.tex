@@ -1,0 +1,42 @@
+\subsection{LTI Observer}
+\textbf{LTI System}
+\begin{align*}
+    x(k) &= A x(k-1) + B u(k-1) + v(k-1) \\
+    z(k) &= H x(k) + w(k)
+\end{align*}
+$v, w$ 0-mean noise CRVs\\
+$\mathbb{E}\{\widehat{x}(k)\} \xrightarrow{k\to\infty} \mathbb{E}\{x(k)\}$, $\mathrm{Var}\{\widehat{x}(k)\}$ bounded
+\smallsectionbox{Luenberger Observer}
+Same structure as steady-state KF:
+\begin{align*}
+    \widehat{x}(k) &= A \widehat{x}(k-1) + B u (k-1) + K (\bar{z}(k) - \widehat{z}(k)) \\
+    &= ({ \mathbb{I} - K_\infty H}) A \widehat{x}(k-1)\\
+    & \quad + ({ \mathbb{I} - K_\infty H})Bu(k-1) + K_\infty \bar{z}(k) \\
+    \widehat{z}(k) &= H(A \widehat{x}(k-1) + Bu(k-1))
+\end{align*}
+\textbf{Error} $e(k) = x(k) - \widehat{x}(k)$ \\
+in absence of noise $\bar{z}(k) = z(k)$
+\begin{align*}
+    e(k) = (\mathbb{I}-KH)A e(k-1)
+\end{align*}
+\begin{itemize}[leftmargin=1em]
+    \item $(\mathbb{I}-KH)A$ must be stable (all $\lvert\lambda\rvert < 1$) for $e\xrightarrow{k\to\infty}0$
+    \item Such $K$ exists iff $(A,H,A)$ detectable $\Leftrightarrow$ $(A,H)$ detectable
+\end{itemize}
+
+\smallsectionbox{Observer Design} 
+If $(A,H)$ detectable, construct $K$
+\begin{description}
+    \item[Pole Placement:] place $\lambda$ of $e$-dynamics of observer modes at desired locations 
+    \item[Steady State KF:] Yields optimal $K$ (min steady-state MSE) given statistics of $v,w$. 
+    Also need $(A,G)$ stabilizable, $\mathrm{Var}\{v(k)\} = GG^\top$
+\end{description}
+\textbf{Alternative Formulation}
+    \begin{align*}
+        \widehat{x}(k+1) &= A\widehat{x}(k) + Bu(k) + K(\bar{z}(k) - \widehat{z}(k))\\
+        \widehat{z}(k) &= H\widehat{x}(k) \to \mathrm{ \ delayed \ measurement}
+    \end{align*}
+\textbf{Error Dynamics}
+\begin{align*}
+    e(k+1) = (A-KH)e(k)
+\end{align*}

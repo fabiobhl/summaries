@@ -1,0 +1,30 @@
+\subsection{Static State Feeback Control}
+\textbf{System Model}\\
+LTI, no noise, deterministic, perf. state info $z(k)=x(k)$:
+\begin{align*}
+    \begin{array}{c | c}
+        \textbf{Feedback Law} & \textbf{CL Dynamics} \\
+        u(k) = Fx(k) = Fz(k) &  x(k) = (A+BF)x(k-1)
+    \end{array}
+\end{align*}
+\begin{itemize}[leftmargin=1em]
+    \item $(A+BF)$ must be stable (all $\lvert\lambda\rvert<1$)
+    \item Such $F$ exists $\Leftrightarrow$ $(A,B)$ stabilizable
+\end{itemize}
+    
+\smallsectionbox{Controller Design}
+\textbf{Pole Placement:} place (controllable) poles at des. CL loc.\\
+\textbf{LQR:} find $F$ that min. quad. cost ($\bar{Q} = \bar{Q}^\top \geq 0, \bar{R} = \bar{R}^\top \geq 0$)
+\begin{align*}
+    J_{\mathrm{LQR}} = \textstyle\sum_{k=0}^{\infty} x^\top(k)\bar{Q} x(k) + u^\top(k) \bar{R} u(k)
+\end{align*}
+\textbf{LQR Design}\\
+Assuming $(A,B)$ stabil., $(A,G)$ detect.
+\begin{align*}
+    F = -(B^\top P B + \bar{R})^{-1} B^\top P A
+\end{align*}
+\textbf{DARE}\\
+Same as KF but $A\to A^\top, H\to B^\top, Q \to \bar{Q}, R\to \bar{R}$
+\begin{align*}
+    P = A^\top P A + \bar{Q} - A^\top P B (B^\top P B + \bar{R})^{-1} B^\top P A
+\end{align*}

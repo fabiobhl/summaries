@@ -1,0 +1,40 @@
+\subsection{Seperation Principle}
+\textbf{Stable Observer + Controller} $\leadsto u(k) = F \widehat{x}(k)$ \\
+\textbf{Dynamics}
+\begin{align*}
+    \begin{bmatrix}
+        x(k) \\
+        e(k)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        A+BF & -BF \\
+        0 & (\mathbb{I}-KH)A
+    \end{bmatrix}
+    \begin{bmatrix}
+        x(k-1) \\
+        e(k-1)
+    \end{bmatrix}
+\end{align*}
+
+\textbf{Separation Principle}
+
+\begin{itemize}[leftmargin=1em]
+    \item $(\mathbb{I}-KH)A$ and $(A+BF)$ stable $\leadsto$ \textbf{Overall system stable}
+    \item Still stable with noise, Generalizable to time-varying case 
+    \item Does \textbf{NOT} hold for nonlinear systems
+\end{itemize}
+
+\smallsectionbox{Separation Theorem} 
+\textbf{Optimal} strategy for control problem 
+\begin{align*}
+    J_{\mathrm{LQG}} = \lim_{N\to\infty} \mathbb{E}\left\{ \textstyle\frac{1}{N} \sum_{k=0}^{N-1}\left[ x^\top(k)\bar{Q}x(k) + u^\top(k)\bar{R}u(k)\right] \right\}
+\end{align*}
+\begin{enumerate}[leftmargin=1.5em]
+    \item Design steady state KF to provide $\widehat{x}(k)$
+    \textbf{(no dependency on $\boldsymbol{\bar{Q}, \bar{R}}$)}
+    \item Design optimal state-FB law $u(k) = Fx(k)$ for determ. LQR problem \\
+    minimizes $J_{\mathrm{LQR}}$ w/o noise \textbf{(no dependency on noise statistics $\boldsymbol{Q,R}$)}
+    \item Put together
+\end{enumerate}
+
