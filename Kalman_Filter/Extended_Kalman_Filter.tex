@@ -1,0 +1,95 @@
+\subsection{Extended Kalman Filter}
+Extension of KF to non-linear systems:
+\begin{align*}
+    &x(k) = q_{k-1}(x(k-1), v(k-1))\\
+    &z(k)= h_k(x(k),w(k))
+\end{align*}
+\begin{center}
+    \begin{tabular}{|l|l|}
+        \hline
+        $x(0), v(\cdot), w(\cdot)$ mutually ind. & $x(0) \sim \mathcal{N}(x_0, P_0)$\\
+        \hline
+        $v \sim \mathcal{N}(0, Q(k))$ & $w \sim \mathcal{N}(0, R(k))$\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\smallsectionbox{EKF Equations}
+Initialization: $\widehat{x}_m(0) = x_0, \quad P_m(0) = P_0$\\
+\textbf{S1 -- Prior Update / Prediction Step}
+\begin{align*}
+    \widehat{x}_p(k) &= q_{k-1}(\widehat{x}_m(k-1), 0) \\
+    P_p(k) &= A(k\!-\!1)P_m(k\!-\!1)A^\top(k\!-\!1)\\
+    &+ L(k\!-\!1)Q(k\!-\!1)L^\top(k\!-\!1)\\
+    A(k\!-\!1) &= \frac{\partial q_{k\!-\!1}(\widehat{x}_m(k\!-\!1),0)}{\partial x}, \ L(k\!-\!1) \!=\! \frac{\partial q_{k\!-\!1}(\widehat{x}_m(k\!-\!1),0)}{\partial v}
+\end{align*}
+\textbf{S2 -- A Posteriori Update / Measurement Update} (at k)
+\begin{align*}
+    K &= P_p H^\top \!\left( H P_p H^\top
+    \!+\! M R M^\top \right)^{-1} \\
+    \widehat{x}_m &= \widehat{x}_p + K 
+    \left( \bar{z} - h_k(\widehat{x}_p(k),0) \right) \\
+    P_m &= \left(\mathbb{I} - K(k) H(k)\right) P_p(k)\\
+    H(k) &:=  \frac{\partial h_{k}(\widehat{x}_p(k, 0))}{\partial x}, \quad
+    M(k) := \frac{\partial h_{k}(\widehat{x}_p(k, 0))}{\partial w}
+\end{align*}
+\smallsectionbox{Intuition}
+\textbf{Process Update} -- predict the mean state estimate fwd using NL process model and update the var. according to lin. eqns \\
+\textbf{Measurement Update} -- correct for mismatch between $\bar{z}(k)$
+and prediction $h_k(\widehat{x}_p(k),0)$, and correct var. according to lin. eqn
+\smallsectionbox{Caution}
+\begin{itemize}[leftmargin=1em]
+    \item Process \& measurement noise \textbf{assumed} 0-mean
+    \item $A,L,H,M$ lin. about current $\widehat{x}_m$ $\leadsto$ \textbf{cannot} compute offline
+    \item Prior update only accurate if $\mathbb{E}\{\cdot\}$ \& $q_{k-1}(\cdot)$ commute
+    \item \textbf{EKF Variables DO NOT capture true conditional mean \& var.}
+\end{itemize}
+
+\subsubsection{Hybrid EKF}
+\textbf{System} \textbf{Process} -- non-lin, CT, \textbf{Measurement} -- non-lin, DT
+\begin{align*}
+    \dot{x}(k) &= q(x(t), v(t), t) \qquad x[k] := x(kT) \\
+    z[k] &= h_k(x[k], w[k]) \qquad \mathbb{E}\{w[k]\} = 0, \mathrm{Var}\{w[k]\} = R
+\end{align*}
+
+\textbf{CT White Noise} $\delta(t)$ = Dirac pulse
+\begin{align*}
+    \mathbb{E}\{v(t)\} = 0 \ \mathrm{ and } \ \mathbb{E}\{v(t)v^\top(t+\tau)\} = \mathcal{Q}_c \delta(\tau)
+\end{align*}
+{\footnotesize
+\textit{True CT White noise does not exist} $\to$ Would require infinite power
+}
+
+\smallsectionbox{Hybrid EKF Equations}
+
+\textbf{Initialization} $\quad\widehat{x}_m(0) = x_0, \quad P_m(0) = P_0$
+
+\textbf{S1 -- Prior Update / Prediction Step} (Solve ODEs)\\
+Solve, for $(k-1)T \leq t \leq kT$ and $\hat{x}((k-1)T) = \widehat{x}_m[k-1]$
+\begin{align*}
+    \dot{\hat{x}}(t) = q(\hat{x}(t),0,t)
+    \quad \Rightarrow \hat{x}_p[k] := \hat{x}(kT)
+\end{align*}
+Solve, for $(k-1)T \leq t \leq kT$ and $P((k-1)T) = P_m[k-1]$
+\begin{align*}
+    \dot{P}(t) = A P \!+\! PA^\top \!+\! LQ_c L^\top 
+    \quad \Rightarrow P_p[k] := P(kT)
+\end{align*}
+with
+\begin{align*}
+    A(t) := 
+    \textstyle\frac{\partial q}{\partial x}(\hat{x}(t),0,t),
+    \qquad L(t) := 
+    \textstyle\frac{\partial q}{\partial v}(\hat{x}(t),0,t)
+\end{align*}
+\textbf{S2 -- A Posteriori Update / Measurement Update} \\
+\textit{Measurement model still DT -- S2 identical to standard EKF}
+\smallsectionbox{Caution}
+\begin{itemize}[leftmargin=1em]
+    \item Process \& measurement noise \textbf{assumed} 0-mean
+    \item ODEs typically solved numerically: Accuracy $\uparrow$ $=$ Comp. Cost $\uparrow$
+\end{itemize}
+
+
+
+
