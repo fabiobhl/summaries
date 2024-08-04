@@ -1,0 +1,59 @@
+\subsection{Monte Carlo Sampling}
+\textbf{Samples} $N$ DRVs $y^n$ of samples of $y\in\mathcal{Y}=\{1,\dots,\bar{Y}\} \sim p_y$\\
+\textbf{Helper Variables}
+\begin{align*}
+    \left.
+    s_i^n = \delta(i-y^n) = 
+    \begin{cases}
+        1 & \mathrm{if } y^n=i \\
+        0 & \mathrm{otherwise}
+    \end{cases}
+    \ \right\rvert \
+    \begin{aligned}
+        i &= 1,\dots, \bar{Y} \\
+        n &= 1,\dots, N
+    \end{aligned}
+\end{align*}
+\textbf{Average} -- $s_i$ converges to $p_y(i)$ by Law of Large Numbers
+\begin{align*}
+    \frac{1}{N} \sum_{n=1}^{N} s_i^n 
+    \xrightarrow{N\to\infty} \mathbb{E}\{s_i^n\} = p_y(i)
+    \qquad 
+    p_y(i) \approx \frac{1}{N} \sum_{n=1}^{N}\bar{s}_i^n
+\end{align*}
+\textbf{Approximation}\\
+For $y\in\mathcal{Y}$, it holds 
+$\quad p_y(i) \approx \textstyle\frac{1}{N}\sum_{n=1}^{N}
+\delta(i-\bar{y}^n), 
+\quad i \in \mathcal{Y}$
+
+For $x=g(y)$, with $x\in\mathcal{X} := g(\mathcal{Y})$, it holds
+\begin{align*}
+    p_x(j) \approx \frac{1}{N}\sum_{n=1}^{N}
+    \delta(j-g(\bar{y}^n)), 
+    \quad j \in g(\mathcal{Y})
+\end{align*}
+
+\vfill \null \columnbreak
+
+\smallsectionbox{Monte Carlo Sampling CRV}
+\textbf{Helper Variables}
+\begin{align*}
+    s_a^n = \textstyle\int_{a}^{a+\Delta y} \delta(i-y^n) d\xi = 
+    \begin{cases}
+        1 & \mathrm{if } a \leq y^n < a + \Delta y \\
+        0 & \mathrm{otherwise}
+    \end{cases}
+\end{align*}
+
+\textbf{Average} -- $s_a$ converges to $p_y(\xi)$ by Law of Large Numbers
+\begin{align*}
+    \textstyle\int_{a}^{a+\Delta y}\frac{1}{N} \sum_{n=1}^{N} \delta(\xi-y^n)d\xi
+    \xrightarrow{N\to\infty}
+    \textstyle\int_{a}^{a+\Delta y} p_y(\xi)d\xi
+\end{align*}
+\textbf{Approximation}
+\begin{align*}
+    &\mathrm{For } \ y\in\mathcal{Y} \ \mathrm{, it \ holds} \ p_y(\xi) \approx \frac{1}{N}\sum_{n=1}^{N}\delta(\xi-\bar{y}^n) \forall\xi \\
+    &\mathrm{For } \ x=g(y) \ \mathrm{, it \ holds} \ p_x(\xi) \approx \frac{1}{N}\sum_{n=1}^{N}\delta(\xi-g(\bar{y}^n)) \forall\xi
+\end{align*}

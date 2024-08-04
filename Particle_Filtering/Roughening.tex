@@ -1,0 +1,18 @@
+\subsection{Roughening}
+\textbf{Sample Impoverishment} \textit{Lumpiness} -- when we resample, only retain subset of particles. For finite $N$ this is problem. \\
+\textbf{Roughening} \\
+Perturb particles \textbf{after} resampling 
+\begin{align*}
+    \bar{x}_m^n(k) \leftarrow \bar{x}_m^n (k) + \Delta x^n(k)
+\end{align*}
+$\Delta x^n(k)$ drawn from 0-mean, finite-var. distribution \\
+\textbf{Example Method for $\boldsymbol{\Delta x^n}$}: $\sigma_i$ stand. dev. of $\Delta x_i^n(k)$
+\begin{align*}
+    \sigma_i = K E_i N^{-\frac{1}{d}}
+\end{align*}
+K: tuning parameter, typically $K \ll 1$\\
+d: dimension of state space\\
+$E_i$: max inter-sample variability $\max_{n_1, n_2} \lvert \bar{x}_{m,i}^{n_1} - \bar{x}_{m,i}^{n_2} \rvert$\\
+$N^{-\frac{1}{d}}$: node spacing on grid
+
+

@@ -1,0 +1,39 @@
+\subsection{Particle Filter - Equations}
+\textbf{Initialization} Draw $N$ samples $\{ \bar{x}_m^n(0) \}$
+from $p_{x(0)}$ \\
+\textbf{S1 -- Prior Update / Prediction Step}\\
+Apply process equation to the particles $\{ \bar{x}_m^n(k-1) \}$
+\begin{align*}
+    \bar{x}_p^n(k) := q_{k-1}(\bar{x}_m^n(k-1), \bar{v}^n(k-1)), 
+    \quad n=1,\dots,N
+\end{align*}
+Requires $N$ noise samples from $p_{v(k-1)}$\\
+\textbf{S2 -- A Posteriori Update / Measurement Update}\\
+Scale each particle by measurement likelihood:
+\begin{align*}
+    \beta_n = \alpha p_{z(k)|x(k)}(\bar{z}(k)|\bar{x}_p^n(k)),
+    \qquad n=1,\dots,N
+\end{align*}
+with $\alpha$ normalization s.t $\sum_{n=1}^N \beta_n = 1$
+\begin{align*}
+    \alpha = \left( \textstyle\sum_{n=1}^{N} p_{z_m(k)|x_p(k)}(\bar{z}(k) | \bar{x}_p^n(k)) \right)^{-1}
+\end{align*}
+\textbf{Resample} to get $N$ posterior particles
+$\{ \bar{x}_m^n(k) \}$, w/ eq. weights
+
+\begin{tcolorbox}[title= Repeat $N$ times: , sharp corners, coltitle=black, colbacktitle=black!20, colback=white!30, colframe=black, boxsep=1pt, left=1pt, right=1pt, top=1pt, bottom=1pt, title filled, boxrule=0.2mm]
+    \begin{itemize}[leftmargin=1em, noitemsep]
+        \item Select random number $r$ uniformly on $(0,1)$
+        \item Pick particle $\bar{n}$ s.t $\sum_{n=1}^{\bar{n}-1}\beta_n < r \leq \sum_{n=1}^{\bar{n}}\beta_n$
+    \end{itemize}
+\end{tcolorbox}
+New particles all have equal weight
+\begin{align*}
+    p_{x_m(k)}(\xi) \approx \textstyle\frac{1}{N}\sum_{n=1}^{N}\delta(\xi - \bar{x}_m^n(k)), \quad \forall\xi
+\end{align*}
+\smallsectionbox{Intuition}
+\textbf{Process Update} -- Propagate $N$ particles through system dynamics. 
+Provided $N$ large, $\{ \bar{x_m^n(k-1)} \} \approx p_{x_m(k-1)}$ $\leadsto$ $\{\bar{x}_p^n(k)\} \approx p_{x_p(k)}$\\
+\textbf{Measurement Update} -- treat each particle separately. 
+At points of high prior, we have many particles. 
+Posterior has same particles, but scaled by measurement likelihood.
