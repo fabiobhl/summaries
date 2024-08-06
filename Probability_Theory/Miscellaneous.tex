@@ -1,6 +1,7 @@
 \subsection{Miscellaneous}
     \textbf{Indep. multiplication:} $z = xy \to p(z) = \sum_{Y} p_x(\frac{z}{y})p_y(y)$ \\
     \smallsectionbox{Uniform Distribution}
+    
     \begin{align*}
         p(x) = \begin{cases}
             \frac{1}{b-a} & a \leq x \leq b \\
@@ -39,16 +40,7 @@
         p_{\mathbf{x}}(\mathbf{\bar{x}}) = \frac{1}{(2\pi)^{D/2} \det(\mathbf{\Sigma})^{1/2}}\exp\left(-\frac{(\mathbf{\bar{x}}-\boldsymbol{\mu})^T\mathbf{\Sigma}^{-1}(\mathbf{\bar{x}}-\boldsymbol{\mu})}{2}\right)
     \end{align*}
     $\leadsto$ fully characterized by mean $\boldsymbol{\mu} \in \mathbb{R}^D$ and Variance $\boldsymbol{\Sigma} \in \mathbb{R}^{D\times D}$\\
-    (Scalar: $D = 1, \ \sigma^2 = \det(\Sigma)\to \det(\Sigma)^{1/2} = \sigma$)
-    \begin{align*}
-        p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
-        \qquad\left\lvert\qquad
-        \begin{aligned}
-            \mathbb{E}\{x\} &= \mu \\
-            \mathrm{Var}\{x\} &= \sigma^2
-        \end{aligned}
-        \right.
-    \end{align*}
+
     \textbf{Affine transformation of Gaussian: $\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Sigma})$}
     \begin{align*}
         \boldsymbol{y} = M \boldsymbol{x} + \boldsymbol{b} \quad \to \quad \boldsymbol{y} \sim \mathcal{N}(M \boldsymbol{\mu} + \boldsymbol{b}, M \boldsymbol{\Sigma} M^T)
@@ -65,5 +57,17 @@
         p(y) = \prod_{i=1}^{D} \textstyle\frac{1}{\sqrt{2\pi\sigma_i^2}} 
         \exp(-\frac{(y_i - \mu_i)^2}{2\sigma_i^2})
     \end{equation*}
+
+    \smallsectionbox{Scalar Gaussian Distribution $D = 1, \ \sigma^2 = \det(\Sigma)\to \det(\Sigma)^{1/2} = \sigma$}
+
+    \begin{align*}
+        p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+        \qquad\left\lvert\qquad
+        \begin{aligned}
+            \mathbb{E}\{x\} &= \mu \\
+            \mathrm{Var}\{x\} &= \sigma^2
+        \end{aligned}
+        \right.
+    \end{align*}
 
     \vfill\null\columnbreak

@@ -34,13 +34,16 @@
             \textbf{Cond. / Product Rule} & $p_{x|yz}(\bar{x}|\bar{y},\bar{z}) := \frac{p_{xy|z}(\bar{x},\bar{y}|\bar{z})}{p_{y|z}(\bar{y}|\bar{z})}$ \\
             \bottomrule
         \end{tabular}
+
         \smallsectionbox{Independence}
+
         \begin{align*}
             p(x|y) = p(x) \ \ \ \Leftrightarrow \ 
             p(y|x) = p(y) \ \ \ \Leftrightarrow \ 
             p(x,y) = p(x)p(y)
         \end{align*}
         $p(x,y,z) = p(x,y|z)p(z)$ $\to$ x,y indp. $p(x,y|z) = p(z|x,y)$
+
         \smallsectionbox{Conditional Independence}
         \vspace{1pt}
         The knowledge of z makes x and y independent:
@@ -50,3 +53,4 @@
         \end{equation*}
         \textbf{Caution!!!} in general we still have: $p(x,y) \neq p(x) p(y)$\\
         \textbf{Caution!!!} Independence $\nRightarrow $ Conditional Independence
+        

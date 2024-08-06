@@ -1,11 +1,14 @@
 \subsection{Modeling}
+\vspace{0.2em}
 \textbf{System} \textit{Non-linear, discrete-time}:
 \begin{align*}
     x(k) &= q_{k-1}(x(k-1), v(k-1)) \\
     z(k) &= h_k(x(k), w(k))
 \end{align*}
 $x(0), \{v\}, \{w\}$ mutually indep. can be D- or CRVs, known PDFs
+
 \smallsectionbox{Objective} 
+
 Bayesian State Estimator with Monte Carlo Sampling
 \begin{align*}
     \begin{array}{l r l}

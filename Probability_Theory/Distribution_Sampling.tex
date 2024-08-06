@@ -1,15 +1,15 @@
 \subsection{Distribution Sampling}
-    \textbf{CDF -- Cumulative Distribution Function} 
+    \smallsectionbox{CDF -- Cumulative Distribution Function}
     \begin{equation*}
         \widehat{F}_x(\bar{x}) := \textstyle\sum_{i=-\infty}^{\bar{x}}\widehat{p}_x(i) = Pr(x \leq \bar{x}) = \int_{-\infty}^{\hat{x}} p_x(\hat{x}) d\hat{x}
     \end{equation*}
 
-    \textbf{A1 -- 1 DRV} $\bar{u}$ sample of $u\sim\mathcal{U}$, solve for $\bar{x}$ such that:
+    \smallsectionbox{A1 -- 1 DRV $\bar{u}$ sample of $u\sim\mathcal{U}$, solve for $\bar{x}$ such that}
     \begin{equation*}
         \widehat{F}_x(\bar{x}-1) < \bar{u} \leq \widehat{F}_x(\bar{x})  
     \end{equation*}
         
-    \textbf{A2 -- Multiple DRV or CRV} \\
+    \smallsectionbox{A2 -- Multiple DRV or CRV}
     \begin{comment}
     \textbf{Option 1} Want $p_{xy}$, $x,y$ scalar-valued, finite DRVS. 
     $N_x$, $N_y$ number of elements in $x,y$. Define $\mathcal{Z} := \{1,\dots, N_x\cdot N_y\}$
@@ -24,7 +24,10 @@
         \item Apply \textbf{A1} to get sample $\bar{y}$ via $\widehat{p}_y(\bar{y})$
         \item With $\bar{y}$ fixed, apply \textbf{A1} to get sample $\bar{x}$ via $\widehat{p}_{x|y}(\bar{x}|\bar{y})$
     \end{itemize}
-    \textbf{A3 -- 1 CRV} $\widehat{p}_x$: pw-conti., bounded. $u\sim\mathcal{U}(0,1)$ and solve:
+    
+    \smallsectionbox{A3 -- 1 CRV $\widehat{p}_x$: pw-conti., bounded. $u\sim\mathcal{U}(0,1)$ and solve:}
     \begin{align*}
         \bar{u} = F_x(\bar{x})  \to \bar{x} &= F_x^{-1}(\bar{u})
     \end{align*}
+
+    \vfill\null\columnbreak

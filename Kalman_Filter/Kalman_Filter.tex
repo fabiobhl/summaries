@@ -1,10 +1,11 @@
 \subsection{Kalman Filter}
-Exact Solution for Bayes Tracking of LTI Systs. with Gauss. Noise.
 \smallsectionbox{Model (Linear Time-Invariant)}
+
 \begin{align*}
     x(k) &= A(k-1)x(k-1)+u(k-1)+v(k-1)\\
     z(k) &= H(k)x(k)+w(k)
 \end{align*}
+\vspace{-1.8em}
 \begin{center}
     \begin{tabular}{|l|l|}
         \hline
@@ -14,11 +15,11 @@ Exact Solution for Bayes Tracking of LTI Systs. with Gauss. Noise.
         \hline
     \end{tabular} 
 \end{center}
+\vspace{-0.8em}
 
 \smallsectionbox{Auxilliary Variables}
 \textbf{Problem Formulation} want $p_{x(k)|z(1:k)} \leadsto$ bayesian tracking provides this
-\textbf{BUT} we have \textbf{CRVs} and don't want integrals \\
-$\Rightarrow$ exploit linearity, GRV to convert to matrix manipulations\\
+\textbf{BUT} we have \textbf{CRVs} and don't want integrals $\Rightarrow$ exploit linearity\\
 \textbf{Auxilliary Variables:}
 \begin{align*}
         \textbf{Init: } x_m(0) &= x(0) \\
@@ -26,7 +27,7 @@ $\Rightarrow$ exploit linearity, GRV to convert to matrix manipulations\\
         \textbf{S2: } z_m(k) &= H(k) x_p(k) + w(k) \\
         p_{x_m(k)}(\xi) &:= p_{x_p(k)|z_m(k)}(\xi | \bar{z}(k)) \quad \forall\xi
 \end{align*}
-\textbf{Equivalency} $x$ conditioned on $z(1:k-1)$/$z(1:k)$
+\textbf{Equivalency}:
 \begin{align*}
     p_{x_p(k)}(\xi) &= p_{x(k)|z(1:k-1)}(\xi|\bar{z}(1:k-1)) \\
     p_{x_m(k)}(\xi) &= p_{x(k)|z(1:k)}(\xi|\bar{z}(1:k))
@@ -34,14 +35,14 @@ $\Rightarrow$ exploit linearity, GRV to convert to matrix manipulations\\
 \textbf{GRV} $x_p$ and $x_m$ are GRVs for $k=1,2,\dots$\\
 \begin{minipage}[c]{0.45\linewidth}
     \begin{align*}
-        \widehat{x}_p(k) &:= \mathbb{E}\left\{ x_p(k) \right\} \\
-        \widehat{x}_m(k) &:= \mathbb{E}\left\{ x_m(k) \right\}
+        \widehat{x}_p(k) &:= \mathbb{E}\left[ x_p(k) \right] \\
+        \widehat{x}_m(k) &:= \mathbb{E}\left[ x_m(k) \right]
     \end{align*}
 \end{minipage}
 \begin{minipage}[c]{0.45\linewidth}
     \begin{align*}
-        P_p(k) &:= \mathrm{Var}\left\{ x_p(k) \right\} \\
-        P_m(k) &:= \mathrm{Var}\left\{ x_m(k) \right\}
+        P_p(k) &:= \mathrm{Var}\left[ x_p(k) \right] \\
+        P_m(k) &:= \mathrm{Var}\left[ x_m(k) \right]
     \end{align*}
 \end{minipage}
 
@@ -61,40 +62,30 @@ $\Rightarrow$ exploit linearity, GRV to convert to matrix manipulations\\
 \end{align*}
 
 \smallsectionbox{Alternative Equations -- all matrices/vectors at time k}
+\begin{equation*}
+    K(k) = P_p(k) H^\top(k) \left( H(k) P_p(k) H^\top(k) \!+\! R(k) \right)^{-1} 
+\end{equation*}
 \textbf{S2 -- Kalman Filter Gain:}
 \begin{align*}
-    K &= P_p H^\top \left( H P_p H^\top \!+\! R \right)^{-1} \\
     \widehat{x}_m &= \widehat{x}_p + K \left( \bar{z} \!-\! H \widehat{x}_p \right) \\
-    P_m &= \underbrace{\left( \mathbb{I} - K H \right) P_p}_{\mathrm{cheaper}}
-    = \underbrace{\left( \mathbb{I} - K H \right) P_p \left( \mathbb{I} - K H \right)^\top + K R K^\top}_{\mathrm{fewer numerical errors}}
+    P_m &= \underbrace{\left( \mathbb{I} - K H \right) P_p}_{\textit{cheaper}}
+    = \underbrace{\left( \mathbb{I} - K H \right) P_p \left( \mathbb{I} - K H \right)^\top + K R K^\top}_{\textit{less sensitive to num. errors}}
 \end{align*}
-
-\textbf{Equivalent to RLS} $\leadsto$ among linear, unbiased estimators KF minimizes MSE
 
 \smallsectionbox{KF Remarks}
-\textbf{Known Data} $A(k),H(k),Q(k),R(k) \ \forall k$ as well as $P_0$ $\leadsto$ KF matrices $P_p(k), P_m(k), K(k)$ can be computed offline
-\begin{align*}
-    \widehat{x}_p(k) &= A(k-1) \widehat{x}_m(k-1) + u(k-1) \\
-    \widehat{x}_m(k) &=\underbrace{(\mathbb{I} - KH) A(k-1)}_{\tilde{A}(k)} \widehat{x}_m(k-1)\\
-    &+ \underbrace{(\mathbb{I} - KH)}_{\tilde{B}(k)} u(k-1) + K\bar{z}(k)
-\end{align*}
-\textit{KF not guaranteed to be optimal} -- non-linear estimators may do better
+\begin{itemize}[leftmargin=5pt]
+    \item The KF is the analytical solution to the Bayesian state estimation problem for linear systems with Gaussian distributions. (Best You can do)
+    \item Otherwise, the KF is no longer optimal. It is the best linear estimator in the MMSE sense but nonlinear might do better.
+    \item $A(k),H(k),Q(k),R(k) \ \forall k$ as well as $P_0$ $\leadsto$ KF matrices $P_p(k), P_m(k), K(k)$ can be computed offline, $K$ no f() of Measurm.
+    \item KF is linear and time-varying:
+    \begin{align*}
+        &\widehat{x}_m(k) = \tilde{A}(k) \cdot \widehat{x}_m(k-1) + \tilde{B}(k) \cdot u(k-1) + K\bar{z}(k) \\
+        &\tilde{A}(k) = (\mathbb{I} - K(k)H(k)) A(k-1), \quad \tilde{B}(k) = (\mathbb{I} - K(k)H(k))
+    \end{align*}
+    \item Among class of linear, unbiased estimators, the KF minimizes MSE
+    \item Not all system matrices need to be pd. some can also be psd. as long as inversions are possible in the update equations.
+\end{itemize}
 
-\subsubsection{Asymptotic Properties of KF}
-\textbf{Model} assume \textbf{TI System, stationary Distributions} ($A, H, Q, R$ constants) \\
-\textbf{Change of Variance}
-\begin{align*}
-    P_p({\scriptstyle k+1}) &= \left(A  P_p({\scriptstyle k}) A^\top\right) + Q \\
-    &- \left( A P_p({\scriptstyle k}) H^\top \right) 
-    \left( H  P_p({\scriptstyle k}) H^\top \!\!+\! R \right)^{-1} 
-    \left( H P_p({\scriptstyle k}) A^\top\right)
-\end{align*}
-\textbf{Scalar Case} $P_p(k+1) = \frac{a^2 r P_p(k)}{h^2 P_p(k) + r}+q =: f(P_p(k))$ \\
-\textbf{Summary} 
-\textit{Variance Converges to unique steady-state sol'n \\
-provided either $\lvert a\rvert <1$ or if $\lvert a \rvert \geq 1$ $\Rightarrow$ 
-$h \neq 0$ and $q >0$}\\
-If slope for small $P_\infty$ is $>1$ $\Rightarrow$ unstable ($\abs*{a}> 1$)
 \subsubsection{Detectability / Stabilizablilty}
 \smallsectionbox{Detectability Conditions}
 Pair $(A,H)$ detectable
@@ -124,7 +115,7 @@ Pair $(A,B)$ stabilizable
     \item Eigenvalues of $A-BK$ (or $(\mathbb{I}-BK)A$) can be placed within unit circle
     by suitable choice of $K\in\mathbb{R}^{m\times n}$
 \end{itemize}
-\textbf{NOTE} Stabilizability is dual of detectability, $(A,B)$ stabilizable 
+
 \smallsectionbox{Observability / Reachability}
 if $(A^\top, B^\top)$ detectable\\
 \begin{minipage}[c]{0.40\linewidth}
@@ -149,6 +140,22 @@ if $(A^\top, B^\top)$ detectable\\
     \end{smallmatrix}\right]$
 \end{minipage}
 
+\subsubsection{Asymptotic Properties of KF}
+\textbf{Model} assume \textbf{TI System, stationary Distributions} ($A, H, Q, R$ constants) \\
+$\leadsto$ the KF is still time-varying!\\
+\textbf{Change of Variance}
+\begin{align*}
+    P_p({\scriptstyle k+1}) &= \left(A  P_p({\scriptstyle k}) A^\top\right) + Q \\
+    &- \left( A P_p({\scriptstyle k}) H^\top \right) 
+    \left( H  P_p({\scriptstyle k}) H^\top \!\!+\! R \right)^{-1} 
+    \left( H P_p({\scriptstyle k}) A^\top\right)
+\end{align*}
+\textbf{Scalar Case} $P_p(k+1) = \frac{a^2 r P_p(k)}{h^2 P_p(k) + r}+q =: f(P_p(k))$ \\
+\textbf{Summary} 
+\textit{Variance Converges to unique steady-state sol'n \\
+provided either $\lvert a\rvert <1$ or if $\lvert a \rvert \geq 1$ $\Rightarrow$ 
+$h \neq 0$ and $q >0$}\\
+
 \subsubsection{Steady-State KF}
 \textbf{DARE -- Discrete Algebraic Ricatti Equation} ($P_\infty$ is $P_p$)
 \begin{equation*}
@@ -158,42 +165,37 @@ if $(A^\top, B^\top)$ detectable\\
     H P_\infty A^\top
 \end{equation*}
 
-\begin{minipage}[c]{0.40\linewidth}
-    \textbf{Steady-State KF Gain} 
-\end{minipage}
-\begin{minipage}[c]{0.58\linewidth}
-    \begin{equation*}
-        K_\infty = P_\infty H^\top (H P_\infty H^\top \!\!+\! R)^{-1}
-    \end{equation*}
-\end{minipage}
+\textbf{Steady-State KF Gain: } $K_\infty = P_\infty H^\top (H P_\infty H^\top \!\!+\! R)^{-1}$
 
-\textbf{Filter Equations} \textbf{Linear Time-Invariant System}
+
+\smallsectionbox{Steady State KF Equations $\widehat{x}(k) := \widehat{x}_m(k)$}
+
 \begin{align*}
     \widehat{x}(k) = 
-    \underbrace{(\mathbb{I} \!-\! K_\infty H) A}_{\widehat{A}} 
-    \widehat{x}({\scriptstyle k - 1}) + 
-    \underbrace{(\mathbb{I} \!-\! K_\infty H)}_{\widehat{B}}
-    u({\scriptstyle k - 1}) \!+\! K_\infty \bar{z}(k)
+    (\mathbb{I} \!-\! K_\infty H) A \widehat{x}({\scriptstyle k - 1}) + 
+    (\mathbb{I} \!-\! K_\infty H) u({\scriptstyle k - 1}) \!+\! K_\infty \bar{z}(k)\\
+    \widehat{x}(k) =  \widehat{A} \cdot \widehat{x}({\scriptstyle k - 1}) + \widehat{B} \cdot u({\scriptstyle k - 1}) + K_\infty \cdot \bar{z}(k), \quad \widehat{x}(0) = x_0
 \end{align*}
 
-\textbf{Error dynamics (also holds for non ss-KF)} $e(k) = x(k) - x_f(k)$ 
+\smallsectionbox{Error dynamics (also holds for non ss-KF)  $e(k) = x(k) - x_f(k)$}
+
 \begin{align*}
     &e(k) = (\mathbb{I} \!-\! K_\infty H)A e(k\!-\!\!1) 
     \!+\! (\mathbb{I} \!-\! K_\infty H) v(k\!-\!1) \!-\! K_\infty w({\scriptstyle k}) \\
-    &\mathbb{E}\{e(k)\} \!=\! (\mathbb{I} \!-\! K_\infty H)A \ \mathbb{E}\{e(k\!-\!1)\}
+    &\mathbb{E}[e(k)] \!=\! (\mathbb{I} \!-\! K_\infty H)A \ \mathbb{E}[e(k\!-\!1)]
 \end{align*}
-\begin{itemize}[leftmargin=1em]
-    \item $(\mathbb{I}-K_\infty H)A$ must be stable (all $\lvert\lambda\rvert < 1$) for $e$ not to diverge
-    \item $\mathbb{E}\{e(k)\} \xrightarrow{k\to\infty} 0$ iff $(\mathbb{I}-K_\infty H)A$ stable
+\begin{itemize}[leftmargin=1em, itemsep=0pt]
+    \item If $\mathbb{E}[e(0)] = 0$ then $\mathbb{E}[e(k)] = 0 \quad \forall k$ $\leadsto$ KF is unbiased
+    \item $\mathbb{E}[e(k)] \xrightarrow{k\to\infty} 0$ $\Leftrightarrow$ $(\mathbb{I}-K_\infty H)A$ stable (all $\lvert\lambda\rvert < 1$)
 \end{itemize}
 
-\textbf{Theorem} for $R>0, Q \geq 0, G \mathrm{ s.t. } Q=GG^\top$
+\textbf{Theorem} for $R>0, Q \geq 0, G \text{ s.t. } Q=GG^\top$
     \begin{itemize}[label=$\Leftrightarrow$, leftmargin=1.6em]
-        \item $(A,H)$ is detectable, $(A,G)$ is stabilizable
+        \item $(A,H)$ is detectable and $(A,G)$ is stabilizable
         \item DARE has unique pos. semidef. sol. $P_\infty \geq 0$, 
         resulting $(\mathbb{I} - K_\infty H)A$ is stable and
         \begin{align*}
-            \lim_{k\to\infty} P_p(k) = P_\infty \quad \forall P_p(1) \geq 0
+            \lim_{k\to\infty} P_p(k) = P_\infty \quad \forall P_p(1) \geq 0 \text{ and } \forall P_m(0) = P_0 \geq 0
         \end{align*}
     \end{itemize}
 \begin{description}

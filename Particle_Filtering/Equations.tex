@@ -1,4 +1,5 @@
 \subsection{Particle Filter - Equations}
+\vspace{0.2em}
 \textbf{Initialization} Draw $N$ samples $\{ \bar{x}_m^n(0) \}$
 from $p_{x(0)}$ \\
 \textbf{S1 -- Prior Update / Prediction Step}\\
@@ -31,9 +32,12 @@ New particles all have equal weight
 \begin{align*}
     p_{x_m(k)}(\xi) \approx \textstyle\frac{1}{N}\sum_{n=1}^{N}\delta(\xi - \bar{x}_m^n(k)), \quad \forall\xi
 \end{align*}
+
 \smallsectionbox{Intuition}
+
 \textbf{Process Update} -- Propagate $N$ particles through system dynamics. 
 Provided $N$ large, $\{ \bar{x_m^n(k-1)} \} \approx p_{x_m(k-1)}$ $\leadsto$ $\{\bar{x}_p^n(k)\} \approx p_{x_p(k)}$\\
 \textbf{Measurement Update} -- treat each particle separately. 
 At points of high prior, we have many particles. 
 Posterior has same particles, but scaled by measurement likelihood.
+\vspace{0.2em}

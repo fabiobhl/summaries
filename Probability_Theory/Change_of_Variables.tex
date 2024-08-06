@@ -11,17 +11,29 @@
     \begin{equation*}
         p_z(\bar{z}) = \sum_{\bar{x}\in\mathcal{X}} p_x(\bar{x}) p_y(\bar{z}-\bar{x})
     \end{equation*}
-    \smallsectionbox{CRV -- Multivar. \& Cond. Case: $z=g(w,x), w=h(z,x)$}
+    \smallsectionbox{CRV -- Multivar. \& Cond. Case: $z=g(w,x) \leadsto w=h(z,x)$}
     \textit{Assumptions:} \\
     - $g(w,x), p_w$ cont. diff'bar \\
     - $g(w,x)$ strictly monotonic \\
     - For scalars $det(x)$ is just $x$
     \begin{align*}
         p_{z|x}(\bar{z}|\bar{x}) = 
-        p_w(h(\bar{z},\bar{x})|\bar{x}) \cdot
+        p_{w|x}(h(\bar{z},\bar{x})|\bar{x}) \cdot
         \left\lvert 
         \det\left( 
             \textstyle\frac{\partial}{\partial w}g(h(\bar{z},\bar{x}),\bar{x}) 
+        \right) 
+        \right\rvert^{-1}
+    \end{align*}
+
+    \smallsectionbox{CRV -- Multivar. \& Cond. Case: $z=g(w) \leadsto w=h(z)$}
+
+    \begin{align*}
+        p_{z}(\bar{z}) = 
+        p_w(h(\bar{z})) \cdot
+        \left\lvert 
+        \det\left( 
+            \textstyle \left. \frac{\partial}{\partial w}g(w)\right|_{w=h(\bar{z})} 
         \right) 
         \right\rvert^{-1}
     \end{align*}
