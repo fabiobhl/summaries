@@ -1,21 +1,26 @@
-\subsection{Least Squares Estimators}
-\subsubsection{Linear Least Squares}
+\subsection{Least Squares Estimators $z,w \in \mathbb{R}^m, x \in \mathbb{R}^n, H \in \mathbb{R}^{m \times n}$}
+\begin{equation*}
+    z = Hx + w
+\end{equation*}
+\subsubsection{Linear Least Squares }
 
 \begin{align*}
     \widehat{x}^{LS} := \mathop{\mathrm{argmin}}_{x}
-    \left[(z-Hx)^\top (z-Hx)\right] = (H^\top H)^{-1} H^\top z
+    \left[(\bar{z}-Hx)^\top (\bar{z}-Hx)\right] = (H^\top H)^{-1} H^\top \bar{z}
 \end{align*}
-$\hat{x}^{LS} = \hat{x}^{ML}$, when errors are indep. 0-mean, same variance, $\mathcal{N}$-distributed
+$\hat{x}^{LS} = \hat{x}^{ML}$, when $w \sim \mathcal{N}(0, \sigma^2 \mathbb{I})$
 
 \subsubsection{Weighted Least Squares}
 \begin{align*}
     \widehat{x}^{WLS} 
     :=& \textstyle\mathop{\mathrm{argmin}}_{x} 
     \left[ (\bar{z} \!-\! H \widehat{x})^\top 
-    R^{-1} (\bar{z} \!-\! H \widehat{x}) \right] \\
-    =& (H^\top R^{-1} H)^{-1} H^\top R^{-1} \bar{z}
+    \Sigma^{-1} (\bar{z} \!-\! H \widehat{x}) \right] \\
+    =& (H^\top \Sigma^{-1} H)^{-1} H^\top \Sigma^{-1} \bar{z}
 \end{align*}
-\textbf{Incorporate Prior Knowledge on x:} \\
+$\hat{x}^{WLS} = \hat{x}^{ML}$, when $w \sim \mathcal{N}(0, \Sigma)$\\
+
+\smallsectionbox{Incorporate Prior Knowledge on x:}
 $r\sim\mathcal{N}(0,P_x) \Rightarrow x := \widehat{x} + r, \mathbb{E}\{x\} = \widehat{x}_0, \mathrm{Var}\{x\} = P_x$ \\
 \textbf{Introduce Extended System:}
 \begin{align*}
@@ -31,7 +36,7 @@ $r\sim\mathcal{N}(0,P_x) \Rightarrow x := \widehat{x} + r, \mathbb{E}\{x\} = \wi
         -r \\
         w(1:k)
     \end{smallmatrix} \right],
-    \tilde{R}= \left[ \begin{smallmatrix}
+    \tilde{\Sigma}= \left[ \begin{smallmatrix}
         P_x & 0 \\
         0 & R(1:k)
     \end{smallmatrix} \right]
@@ -46,7 +51,7 @@ $r\sim\mathcal{N}(0,P_x) \Rightarrow x := \widehat{x} + r, \mathbb{E}\{x\} = \wi
     J(k):= \mathbb{E}\left\{ e^\top(k)e(k) \right\} 
     = \mathbb{E}\left\{ \mathrm{trace}(P(k)) \right\}
 \end{equation*}
-\textbf{Algorithm}
+\textbf{We Have:} $\hat{x}_0 = \mathbb{E}[x], P_x = \text{Var}[x], \mathbb{E}[w(k)]=0, R(k) = \text{Var}[w(k)] $
 \begin{description}[leftmargin=0pt]
     \item[Initialization:] $\widehat{x}(0) = \widehat{x}_0, \quad  P(0) = P_x = \mathrm{Var}\{x\}$
     \item[Recursion:] Observe $\bar{z}(k)$, then update:
